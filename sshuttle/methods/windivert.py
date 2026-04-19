@@ -332,11 +332,11 @@ class Method(BaseMethod):
                             f"No address found for {family.name} in {local_addresses}")
         debug2(f"Found non loopback address to connect to proxy: {proxy_ip}")
         subnet_addresses = []
-        for (_, mask, exclude, network_addr, fport, lport) in subnets:
+        for (_, mask, exclude, network_addr, lport, fport) in subnets:
             if fport and lport:
                 if lport > fport:
                     raise Fatal("lport must be less than or equal to fport")
-                ports = (fport, lport)
+                ports = (lport, fport)
             else:
                 ports = None
             subnet_addresses.append((ip_network(f"{network_addr}/{mask}"), ports, exclude))
